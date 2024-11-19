@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+// Message between Agent <==> Client
+message ClientMessage {
+  oneof msg {
+    Ping ping = 1;
+    Pong pong = 2;
+  }
+}
+
+message Ping {
+  uint64 ts_us = 1;
+}
+
+message Pong {
+  // The origin ts_us from Ping message
+  uint64 ts_us = 1;
+  // The Ping message receive timestamp in micro seconds.
+  // The field is for measure the latency(MUST sync time first).
+  uint64 recv_ts_us = 2;
+}
